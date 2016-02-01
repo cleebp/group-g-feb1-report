@@ -14,38 +14,31 @@
 \documentclass{acm_proc_article-sp}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{float}
 
 \makeatletter
 \def\@copyrightspace{\relax}
 \makeatother
 
 \begin{document}
-
-\title{Copy and Paste Habits and Improvements for the Everyday Programmer}
-\subtitle{February 1 Deliverable\thanks{This report is Group G's first project deliverable for CSC 510 in the Spring of 2016 taught by Dr. T. Menzies at North Carolina State University.}}
+\title{An Analysis of Programmer Copy and Paste Habits}
+\subtitle{Proposal of Clipit: An Intelligent Clipboard Manager for Java Programmers\thanks{This report is Group G's February 1 Deliverable for CSC 510 taught by Dr. T. Menzies in the Spring of 2016 at North Carolina State University.}}
 
 \numberofauthors{4} 
 \author{
 \alignauthor
 Brian Clee\\
-       %\affaddr{NC State University}\\
-       %\affaddr{Address One}\\
        \email{bpclee@ncsu.edu}
 \alignauthor
 Effat Farhana\\
-       %\affaddr{NC State University}\\
-       %\affaddr{Address Two}\\
        \email{efarhan@ncsu.edu}
 \and % go to new row
 \alignauthor
 Arjun Madan\\
-       %\affaddr{NC State University}\\
-       %\affaddr{Address Three}\\
        \email{amadan2@ncsu.edu}
 \alignauthor
 Ran Tan\\
-       %\affaddr{NC State University}\\
-       %\affaddr{Address Four}\\
        \email{rtan2@ncsu.edu}
 }
 
@@ -108,7 +101,7 @@ Clearly, the copy and paste command is incredibly influential in a programmer's 
 
 All operating systems come with a system clipboard. It involves storing a single item, whether a piece of text, URL, image, or file to a place in memory. This item can then be retrieved multiple times and copied to appropriate locations. The main drawback of such a system is that when a new item is copied to memory, all information regarding the previous one is lost. If users wanted to obtain this information again, they would have to find the item and copy or cut it again. Programmers typically use the  clipboard to copy and paste code from other sources into the code they're writing.~\cite{codeReuse}
 
-There are many solutions that exist that make the system clipboard easier and quicker to use. X Window~\cite{overlapWindow} is an application that speeds up by having users drag to select text and then use the middle-click of the mouse to paste, instead of the default keyboard option. While this does offer more convenience, and saves some time, it doesn't address the main pain point with the system clipboard.
+There are many solutions that exist that make the system clipboard easier and quicker to use. X Window~\cite{overlapWindow} is an application that speeds this up by having users drag to select text and then use the middle-click of the mouse to paste, instead of the default keyboard option. While this does offer more convenience, by saving some time, it doesn't address the main pain point with the system clipboard.
 
 A significant improvement over this is the multi-item clipboard.~\cite{cpHabits} It stores multiple items in memory, and allows a way of retrieving them through shortcuts or a visual interface. The main advantage of this method is the time users save, as they don't have to go back to the source of an older item in order to paste it. Figure \ref{fig:Multi}~\cite{cpHabits} shows how there are fewer changes in window focus, thereby saving the user time. The study conducted by Stolee et al. monitored 15 users and recorded their copy-paste actions. In total, 2544 clipboard interactions were captured and the most frequent type of copy-paste was across windows, occurring 38\% of the time. They also observed that 20\% of the items on the clipboard were pasted multiple times, with the average number of destinations being 3. In these situations, having a multi-item clipboard would significantly reduce the time taken to paste items previously copied, by allowing the user to paste without having to switch windows repeatedly.
 
@@ -130,7 +123,7 @@ To efficiently manage clones of code, clone detection methods are needed. There 
     \label{fig:detect}
 \end{figure}
 
-To understand the evolution of code clone, ~\cite{empirical} developed a model of clone genealogy. In the model, 
+To understand the evolution of code clone, ~\cite{empirical} developed a model of clone genealogy. In the model, a Code Snippet with two attributes Text and Location is defined as the basic unit. The internal property Text can be compared to measure the similarity of two code snippets while the external property Location is used to trace code snippets across multiple versions of program. Correspondingly, a TextSimilarity function and a LocationOverlapping function is defined respectively to measure the text similarity and location overlapping of two code snippets. Finally, several evolution patterns are defined to cover all possible changes to a code block. These patterns are self-expressed and can be organized into a directed acyclic graph to represent complex evolution patterns for further analysis. Figure \ref{fig:detect}~\cite{towards_tool} and Figure \ref{fig:detect}~\cite{towards_tool} gives two examples of this model.
 
  \begin{figure}[h]
  \centering
@@ -198,8 +191,19 @@ the design level. The paper ~\cite{Pattern} discusses the state-of-the-art patte
 
 6. Touch Screen Interactions\\
 If there is touch screen environment support, features could be included such as :tap on code fragments to be copied, and paste at desired destination. \\
+
 7. Intelligent Display Manager\\
-~\cite{bworld}
+An important feature of an important clipboard manager is:\\ \textit{"How to order copied items and display them?"}\\
+A smart clipboard for Windows is Kana Clip ~\cite{KanaClip}. The program is able to automatically monitor and store clipboard data into its memory. In order to access the text entries saved to the clipboard, user needs to make use of a hotkey. A list with all available options is automatically displayed in a popup panel. Another smart clipboard is Clipboard History ~\cite{ClipHistory}.
+ \begin{figure}[h]
+ \centering
+\includegraphics[width=9.5cm]{ClipHistory}
+\caption{Clipboar History Clipboard Manager}
+    \label{fig:Clip_History}
+\end{figure} 
+In Clipboard History,the left of Figure \ref{fig:Clip_History} pane is the history -what the user has recently copied to the clipboard. The right pane is known as stickies, or permanent clips, which can not be overwritten like the history. This is great for things that user knows he will need to access frequently further in the future like email, phone number. Clipboard History will display both the last texts user has copied to clipboard and his predefined text clips.  
+
+We would like to add some features similar to Kana Clip and Clipboard History regarding ordering and displaying large chunk of codes. 
 
 \section{Conclusion}
 All programmers make use of the copy-paste functionality as part of their work-flow while programming. Studies have shown that the average programmer performs these actions 16 times in an hour, and uses the default system clipboard for this. Using the default system clipboard can lead to a few unintended consequences such as code cloning, issues with using common design patterns, and a general reduction in productivity by having to switch between files, projects, and windows while copy-pasting code multiple times.
